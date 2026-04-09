@@ -1,8 +1,9 @@
+name: dream-as-a-service
+
 services:
   backend:
     build:
       context: ./backend
-    container_name: dream-service-backend
     environment:
       DREAM_DATABASE_URL: sqlite:////app/data/dreams.db
       DREAM_CORS_ORIGINS: http://localhost:3000
@@ -16,11 +17,10 @@ services:
       context: ./frontend
       args:
         VITE_API_BASE_URL: /api
-    container_name: dream-service-frontend
     depends_on:
       - backend
     ports:
-      - "3000:80"
+      - "3001:80"
 
 volumes:
   dream_data:

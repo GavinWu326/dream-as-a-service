@@ -1,6 +1,6 @@
 import { startTransition, useEffect, useState } from "react";
-import { motion } from "framer-motion";
 
+import { HeroDreamscape } from "./components/HeroDreamscape";
 import { NeuralConstellation } from "./components/NeuralConstellation";
 import {
   fetchConstellation,
@@ -105,22 +105,7 @@ export default function App() {
           </div>
         </div>
 
-        <motion.div
-          className="hero-poster"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, ease: "easeOut" }}
-        >
-          <div className="poster-surface">
-            <span className="poster-label">Nocturnal Memory Lifecycle</span>
-            <div className="poster-stages">
-              <div>Observation</div>
-              <div>Dream</div>
-              <div>Memory</div>
-              <div>Recall</div>
-            </div>
-          </div>
-        </motion.div>
+        <HeroDreamscape />
       </header>
 
       <main className="main-grid">
@@ -220,4 +205,3 @@ export default function App() {
     </div>
   );
 }
-

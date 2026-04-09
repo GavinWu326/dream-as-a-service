@@ -178,6 +178,10 @@ flowchart LR
 
 前端把记忆系统表现成一张活的图，而不是简单的 CRUD 表格。
 
+<p align="center">
+  <img src="./docs/images/frontend-hero.png" alt="Dream-as-a-Service 前端梦境首页" width="100%">
+</p>
+
 - **Hero 首屏**：把项目本身展示成一个记忆装置
 - **Neural Constellation**：把 observations、memories、dream runs 画成一片发光场
 - **Latest Dream Rail**：展示最近一次 dream 的变更摘要
@@ -251,7 +255,7 @@ docker compose up --build
 
 启动后访问：
 
-- 前端：`http://localhost:3000`
+- 前端：`http://localhost:3001`
 - 后端：`http://localhost:8000`
 
 前端容器会自动把 `/api` 代理到后端。
