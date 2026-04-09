@@ -1,63 +1,163 @@
+<div align="center">
+
 # Dream-as-a-Service
 
-> By day, your agents collect sparks.  
-> By night, this service turns them into constellations.
+### A long-term memory lifecycle service for agents
 
-Dream-as-a-Service is a small but complete reference implementation of a **long-term memory lifecycle service** for AI agents.
+<p>
+  <em>By day, your agents collect sparks.<br/>By night, this service turns them into constellations.</em>
+</p>
 
-It is not a chat transcript archive.  
-It is not a vector store with nicer branding.  
-It is a system for **observations, consolidation, durable memory, and recall**.
+<p>
+  <img src="https://img.shields.io/badge/backend-FastAPI-0f766e?style=flat-square" alt="FastAPI">
+  <img src="https://img.shields.io/badge/frontend-React%20%2B%20Vite-0f172a?style=flat-square" alt="React Vite">
+  <img src="https://img.shields.io/badge/memory-dream%20consolidation-f59e0b?style=flat-square" alt="Dream consolidation">
+  <img src="https://img.shields.io/badge/docker-ready-2563eb?style=flat-square" alt="Docker ready">
+  <img src="https://img.shields.io/badge/tests-5%20passed-15803d?style=flat-square" alt="Tests passed">
+</p>
 
-The central idea is simple:
+</div>
 
-- agents gather raw observations while they work
-- a background or manual **dream run** revisits those observations
-- the dream merges signal, prunes noise, updates durable memories, and leaves behind a cleaner graph for future recall
+---
 
-This repository ships as a full-stack demo with:
+## First Glance
 
-- a `FastAPI` backend
-- a dreamy frontend visualization inspired by neuron clusters and celestial maps
-- rich default seed data
-- API tests
-- Dockerfiles for both services
-- a `docker-compose.yml` for one-command local launch
+Dream-as-a-Service is a full-stack reference implementation of a **memory lifecycle service** for AI systems.
 
-## The Premise
+It is not:
 
-Most agent memory systems fail in a predictable way: they become hoarders.
+- a chat transcript archive
+- a vector database with prettier language
+- a passive note store
+
+It is:
+
+- an **observation intake layer**
+- a **dream consolidation engine**
+- a **durable memory graph**
+- a **recall interface for future agents**
+
+The governing idea is simple:
+
+> raw signal should be easy to gather,  
+> but hard-earned memory should be curated.
+
+---
+
+## Why It Exists
+
+Most memory systems for agents fail in a familiar way.
 
 They remember too much.  
 They remember without taste.  
 They retrieve stale fragments with the confidence of prophecy.
 
-Dream-as-a-Service tries a different posture:
+Dream-as-a-Service tries a stricter posture:
 
-1. **Observations are cheap.**
-   Let agents record raw signals freely.
+1. **Observations are cheap.**  
+   Let agents collect fragments freely.
 
-2. **Durable memory is expensive.**
-   Only promote what remains useful beyond the current turn.
+2. **Durable memory is expensive.**  
+   Only keep what still matters after the current turn is over.
 
-3. **Dreams are the governance layer.**
-   A dream is not another save. It is a reflective pass that can create, update, merge, or archive memory.
+3. **Dreams are governance, not storage.**  
+   A dream can create, update, merge, prune, or archive memory.
 
-4. **Recall should feel curated.**
-   The future agent should inherit a memory constellation, not a junk drawer.
+4. **Recall should feel curated.**  
+   The future agent should inherit a constellation, not a junk drawer.
 
-## What Exists In This Demo
+---
+
+## What This Demo Ships
+
+| Layer | What you get |
+| --- | --- |
+| Backend | FastAPI API service for observations, dream runs, durable memories, and retrieval |
+| Frontend | A neuron-and-starlight interface for inspecting the dream graph |
+| Seed Data | Rich fictional operational memory with users, projects, references, and pending signals |
+| Tests | API tests that validate dream processing and retrieval behavior |
+| Delivery | Dockerfiles for frontend/backend plus `docker compose` orchestration |
+
+---
+
+## System Mood
+
+The UI is intentionally not a generic admin dashboard.
+
+It is designed as a **nocturnal memory observatory**:
+
+- poster-like hero composition
+- deep ocean and amber atmosphere
+- glowing neural constellation
+- memory ribbons instead of card mosaics
+- “incoming weather” for raw observations
+
+The visual thesis is:
+
+> memory should feel less like a filing cabinet  
+> and more like a living night sky
+
+---
+
+## Core Model
+
+This implementation centers on four entities:
+
+| Entity | Meaning |
+| --- | --- |
+| `Observation` | Raw incoming signal from chat, tools, systems, incidents, or workflows |
+| `Memory` | Durable context worth carrying into future sessions |
+| `DreamRun` | A reflective consolidation pass over pending observations |
+| `DreamMutation` | The record of what the dream changed and why |
+
+### Durable Memory Types
+
+The service currently uses four memory types:
+
+- `user`
+- `feedback`
+- `project`
+- `reference`
+
+That choice is deliberate.  
+The goal is to preserve **future-useful, non-obvious context**, not mirror code, tickets, or documentation line-for-line.
+
+---
+
+## Dream Lifecycle
+
+```mermaid
+flowchart LR
+    A[Observation Stream] --> B[Dream Run]
+    B --> C[Create / Update / Archive]
+    C --> D[Durable Memory Graph]
+    D --> E[Recall Context API]
+    E --> F[Future Agent Session]
+```
+
+### In this repository, a dream run:
+
+1. reads all unprocessed observations
+2. groups them into memory clusters
+3. creates new memories or reinforces existing ones
+4. refreshes freshness state
+5. archives weak dormant memories when needed
+6. records every mutation for inspection
+
+You can think of the architecture as:
+
+`observation stream -> dream consolidation -> durable memory graph -> recall`
+
+---
+
+## Interface Surfaces
 
 ### Backend
 
-The backend models four core entities:
+The backend exposes a compact but useful memory API.
 
-- `Observation`
-- `Memory`
-- `DreamRun`
-- `DreamMutation`
-
-Key endpoints:
+<details>
+<summary><strong>Primary endpoints</strong></summary>
 
 - `GET /api/health`
 - `GET /api/story`
@@ -72,55 +172,42 @@ Key endpoints:
 - `POST /api/dream-runs`
 - `GET /api/constellation`
 
+</details>
+
 ### Frontend
 
-The frontend is intentionally not a generic admin dashboard.
+The frontend shows the memory system as a living graph rather than a plain CRUD table.
 
-It presents the service as a **nocturnal memory observatory**:
+- **Hero**: the project as a memory instrument
+- **Neural Constellation**: observations, memories, and dream runs rendered as a glowing field
+- **Latest Dream Rail**: the most recent mutation summary
+- **Durable Memory Gallery**: strongest surviving memories
+- **Incoming Weather**: pending observations waiting for the next night shift
 
-- a poster-like first viewport
-- a neuron-and-starlight graph for observations, memories, and dream runs
-- a latest-dream rail
-- durable memory ribbons
-- incoming signal weather
+---
 
-### Seed Data
+## Seed World
 
-The demo includes a fictional but realistic operating world:
+This demo includes a fictional but believable operating world so the interface feels alive on first boot.
 
-- distinct users with collaboration preferences
-- project constraints
-- team-level references
-- unprocessed observations waiting for the next dream
+The seed data includes:
 
-This gives the UI something alive to render on first boot and makes the API useful immediately.
+- users with collaboration preferences
+- project-level delivery and compliance constraints
+- team-level reference beacons
+- fresh, unprocessed observations waiting for a dream
 
-## Memory Model
+That means the service can demonstrate:
 
-This implementation uses four durable memory types:
+- memory reinforcement
+- new memory creation
+- recall scoring
+- dream mutation history
+- graph visualization
 
-- `user`
-- `feedback`
-- `project`
-- `reference`
+without any manual setup.
 
-That choice is deliberate.  
-The service is trying to preserve **non-obvious future context**, not mirror code, tickets, or documentation line-for-line.
-
-## How A Dream Works
-
-In this repository, a dream run does the following:
-
-1. Reads all unprocessed observations.
-2. Groups them into memory clusters using scope, type, and cluster key.
-3. Creates new memories or updates existing ones.
-4. Refreshes freshness state.
-5. Optionally archives weak dormant memories.
-6. Records every mutation in a `DreamRun`.
-
-You can think of it as:
-
-`observation stream -> dream consolidation -> durable memory graph -> recall`
+---
 
 ## Local Development
 
@@ -134,7 +221,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-The backend will start on `http://localhost:8000`.
+Backend runs at `http://localhost:8000`.
 
 ### Frontend
 
@@ -144,17 +231,19 @@ npm install
 npm run dev
 ```
 
-The frontend will start on `http://localhost:5173`.
+Frontend runs at `http://localhost:5173`.
 
-If you want the frontend to point to a custom backend:
+To point the frontend at a custom backend:
 
 ```bash
 VITE_API_BASE_URL=http://localhost:8000/api npm run dev
 ```
 
+---
+
 ## Docker
 
-Run the full experience with:
+Run the whole system with one command:
 
 ```bash
 docker compose up --build
@@ -163,9 +252,11 @@ docker compose up --build
 Then open:
 
 - frontend: `http://localhost:3000`
-- backend API: `http://localhost:8000`
+- backend: `http://localhost:8000`
 
 The frontend container proxies `/api` to the backend automatically.
+
+---
 
 ## Tests
 
@@ -174,45 +265,17 @@ cd backend
 pytest
 ```
 
-The tests verify:
+The current test suite verifies:
 
 - seed data appears on startup
-- context retrieval returns relevant memories
-- manual dream runs process pending observations
-- the constellation payload includes memories, observations, and dreams
+- retrieval returns relevant ranked memories
+- manual dream runs process pending signals
+- the constellation payload contains dreams, observations, and memories
 - new observations can be created through the API
 
-## Why This Project Exists
+---
 
-This repo is meant to be a **first version of a product idea**, not just a coding exercise.
-
-If you want to turn Dream-as-a-Service into a real platform, the next layers would be:
-
-- multi-tenant auth
-- memory policies
-- human review for dream mutations
-- stronger retrieval ranking
-- workflow integrations
-- background scheduling
-- audit views and memory lineage
-
-## Art Direction
-
-The interface is built around a visual thesis:
-
-> memory should feel less like a filing cabinet and more like a living night sky
-
-That is why the project uses:
-
-- deep-ocean and amber tones
-- poster-scale typography
-- sparse composition
-- animated graph pulses instead of dashboard tiles
-
-The goal is not novelty for novelty's sake.  
-It is to make the system's behavior legible through atmosphere.
-
-## Repository Structure
+## Project Structure
 
 ```text
 dream-as-a-service
@@ -233,12 +296,31 @@ dream-as-a-service
 └── docker-compose.yml
 ```
 
-## Final Note
+---
+
+## If You Wanted To Productize It
+
+This repository is deliberately a strong first version, not the end state.
+
+Natural next layers would be:
+
+- multi-tenant auth
+- policy-aware memory retention
+- human review for dream mutations
+- better retrieval ranking
+- scheduling and background workers
+- memory lineage and audit views
+- workflow integrations
+- richer scope and tenancy controls
+
+---
+
+## Final Question
 
 A good memory system should not only ask:
 
-**What can we store?**
+### What can we store?
 
 It should ask:
 
-**What deserves to survive the night?**
+### What deserves to survive the night?
